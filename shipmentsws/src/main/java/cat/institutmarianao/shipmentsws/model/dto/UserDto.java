@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import cat.institutmarianao.shipmentsws.model.User;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/* JPA*/
+@Entity(name = "USERS")
 /* Swagger */
 @Schema(oneOf = { ReceptionistDto.class, LogisticsManagerDto.class, CourierDto.class }, discriminatorProperty = "role")
 /* Lombok */
@@ -15,7 +18,10 @@ import lombok.EqualsAndHashCode;
 public abstract class UserDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	/* JPA*/
+	
+	
 	/* Lombok */
 	@EqualsAndHashCode.Include
 	protected String username;
@@ -30,4 +36,5 @@ public abstract class UserDto implements Serializable {
 
 	protected String location;
 
+	
 }
