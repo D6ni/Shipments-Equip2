@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import cat.institutmarianao.shipmentsws.ShipmentswsApplication;
 import cat.institutmarianao.shipmentsws.model.Action;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +18,10 @@ import lombok.EqualsAndHashCode;
 /* Lombok */
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
+/* JPA */
+@Entity
+@Table(name = "actions")
 public abstract class ActionDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
