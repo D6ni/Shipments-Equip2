@@ -5,6 +5,7 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+
 /* Lombok */
 @Data
 @EqualsAndHashCode(callSuper = true)
