@@ -6,11 +6,6 @@ import java.lang.String;
 
 import cat.institutmarianao.shipmentsws.model.Address;
 import cat.institutmarianao.shipmentsws.model.Shipment;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

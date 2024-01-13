@@ -2,12 +2,22 @@ package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /* Lombok */
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
+@Entity
+@Table(name = "users")
 public abstract class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -30,13 +40,21 @@ public abstract class User implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
+	
+	@Id
+	@Basic
 	protected String username;
 
+	@Enumerated(EnumType.STRING)
+	@Column(name = "role")
 	protected Role role;
 
+	@Basic
 	protected String password;
 
+	@Column(name = "full_name")
 	protected String fullName;
 
+	@Basic
 	protected Integer extension;
 }
