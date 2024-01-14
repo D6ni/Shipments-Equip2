@@ -3,9 +3,10 @@ package cat.institutmarianao.shipmentsws.model;
 import java.io.Serializable;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,7 +14,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 
-@Table(name = "actions")
+@Entity
+@DiscriminatorValue(Action.ASSIGNMENT)
 public class Assignment extends Action implements Serializable {
 
 	private static final long serialVersionUID = 1L;

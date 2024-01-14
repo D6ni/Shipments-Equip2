@@ -2,9 +2,10 @@ package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
 
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,12 +13,13 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 
-@Table(name = "users")
+@Entity
+/* An employee is identified in the user table with role=EMPLOYEE */
+@DiscriminatorValue(User.COURIER)
 public class Courier extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
-	@JoinColumn(name = "company_id", referencedColumnName = "id")
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Company company;
 }

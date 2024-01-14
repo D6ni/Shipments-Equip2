@@ -5,13 +5,20 @@ import java.util.Date;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,7 +27,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 /* JPA */
 @Entity
-@Table(name = "actions")
+@Table(name = "actions", indexes = { @Index(name = "type", columnList = "type", unique = false),
+		@Index(name = "shipment_x_date", columnList = "shipment_id, date DESC", unique = true) })
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Action implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -39,20 +49,20 @@ public abstract class Action implements Serializable {
 	/* JPA */
 	@Id
 	@Basic
+	@NotNull
 	protected Long id;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "type")
+	@Column(name = "type", insertable = false, updatable = false, nullable = false)
 	protected Type type;
 	
-	@ManyToOne
-	@JoinColumn(name = "performer_username", referencedColumnName = "username")
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	protected User performer;
 
-	@Basic
+	@Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	protected Date date = new Date();
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "shipment_id", referencedColumnName = "id")
 	protected Shipment shipment;
 }

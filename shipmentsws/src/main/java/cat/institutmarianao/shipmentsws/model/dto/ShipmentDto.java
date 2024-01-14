@@ -2,6 +2,9 @@ package cat.institutmarianao.shipmentsws.model.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.lang.String;
 
 import cat.institutmarianao.shipmentsws.model.Address;
@@ -29,6 +32,8 @@ public class ShipmentDto implements Serializable {
 	
 	protected String courier;
 	
+	/* JSON */
+	@JsonFormat(shape = JsonFormat.Shape.STRING)
 	protected Date receptionDate = new Date();
 
 	private Shipment.Category category;
