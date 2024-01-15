@@ -1,5 +1,7 @@
 package cat.institutmarianao.shipmentsws.model.convert.converter;
 
+import java.util.Optional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
@@ -10,11 +12,13 @@ import cat.institutmarianao.shipmentsws.model.Assignment;
 import cat.institutmarianao.shipmentsws.model.Courier;
 import cat.institutmarianao.shipmentsws.model.Delivery;
 import cat.institutmarianao.shipmentsws.model.Reception;
+import cat.institutmarianao.shipmentsws.model.Shipment;
 import cat.institutmarianao.shipmentsws.model.User;
 import cat.institutmarianao.shipmentsws.model.dto.ActionDto;
 import cat.institutmarianao.shipmentsws.model.dto.AssignmentDto;
 import cat.institutmarianao.shipmentsws.model.dto.DeliveryDto;
 import cat.institutmarianao.shipmentsws.model.dto.ReceptionDto;
+import cat.institutmarianao.shipmentsws.services.ShipmentService;
 import cat.institutmarianao.shipmentsws.services.UserService;
 
 @Component
@@ -22,6 +26,9 @@ public class ActionDtoToActionConverter implements Converter<ActionDto, Action> 
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ShipmentService shipmentService;
 
 	@Override
 	public Action convert(ActionDto actionDto) {
@@ -56,6 +63,10 @@ public class ActionDtoToActionConverter implements Converter<ActionDto, Action> 
 		action.setDate(actionDto.getDate());
 		User performer = userService.getByUsername(actionDto.getPerformer());
 		action.setPerformer(performer);
-		// TODO Copy shipment
+		// TODO Copy shipments
+		Optional<Shipment> shipment = shipmentService.findById(actionDto.getShipmentId());
+		if (!shipment.isEmpty()) {
+		    action.setShipment(shipment.get());
+		}
 	}
 }
