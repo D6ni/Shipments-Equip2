@@ -33,7 +33,7 @@ public class ShipmentToShipmentDtoConverter implements Converter<Shipment, Shipm
 		}
 
 		BeanUtils.copyProperties(shipment, shipmentDto);
-
+		
 		shipmentDto.setReceptionist(reception.getPerformer().getUsername());
 		shipmentDto.setReceptionDate(reception.getDate());
 		shipmentDto.setTrackingNumber(reception.getTrackingNumber());
