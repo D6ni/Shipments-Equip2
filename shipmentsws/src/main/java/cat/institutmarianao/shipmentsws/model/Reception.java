@@ -18,6 +18,6 @@ public class Reception extends Action implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name = "tracking_number")
+	@Column(name = "tracking_number", nullable = false, unique = true)
 	private Integer trackingNumber;
 }

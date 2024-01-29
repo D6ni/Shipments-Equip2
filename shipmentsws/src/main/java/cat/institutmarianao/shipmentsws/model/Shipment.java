@@ -90,7 +90,7 @@ public class Shipment implements Serializable {
 	/* JPA */
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "shipment")
 	@Column(nullable = false)
-	@OrderBy("date")
+	@OrderBy("date DESC")
 	private List<Action> tracking;
 
 	/* JPA */

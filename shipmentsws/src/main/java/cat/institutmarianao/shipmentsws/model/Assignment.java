@@ -2,11 +2,12 @@ package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -26,7 +27,9 @@ public class Assignment extends Action implements Serializable {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "courier_username", referencedColumnName = "username")
 	private Courier courier;
-	@Basic
+	
+	@Min(MIN_PRIORITAT)
+	@Max(MAX_PRIORITAT)
 	private Integer priority;
 
 }

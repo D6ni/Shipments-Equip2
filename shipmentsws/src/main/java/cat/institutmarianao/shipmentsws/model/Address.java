@@ -44,7 +44,8 @@ public class Address implements Serializable {
 	private String city;
 	@Basic
 	private String province;
-	@Basic
+	
+	@Column(name = "postal_code")
 	private String postalCode;
 	@Basic
 	private String country;

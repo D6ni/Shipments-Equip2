@@ -3,7 +3,6 @@ package cat.institutmarianao.shipmentsws.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
@@ -11,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.Inheritance;
@@ -48,8 +49,9 @@ public abstract class Action implements Serializable {
 	@EqualsAndHashCode.Include
 	/* JPA */
 	@Id
-	@Basic
 	@NotNull
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	protected Long id;
 	
 	@Enumerated(EnumType.STRING)

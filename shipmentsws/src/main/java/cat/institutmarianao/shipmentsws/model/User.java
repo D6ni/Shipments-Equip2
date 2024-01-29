@@ -11,6 +11,8 @@ import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.Inheritance;
@@ -56,6 +58,7 @@ public abstract class User implements Serializable {
 	@EqualsAndHashCode.Include
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
     @Size(min = MIN_USERNAME, max = MAX_USERNAME)
 	protected String username;
